@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState, useEffect} from 'react';
+import { HashLoader  } from 'react-spinners';
+import Navbar from './Components/Navbar';
+import Header from './Components/Header';
+import Products from './Components/Products';
+import About from './Components/About';
+import Contacts from './Components/Contacts';
 
 function App() {
+  const[loading,setLoading]=useState(false);
+ 
+  useEffect(()=>{
+  setLoading(true);
+  setTimeout(()=>{
+    setLoading(false);
+  },5000);
+  },[]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+     {
+      loading ? <HashLoader  color={'#36d7b7'} loading={loading} cssOverride={{marginTop:'45vh', marginLeft:'45vw'}} size={50}/>
+      :
+      <>
+        <Navbar/>
+        <Header/>
+        <Products/>
+        <About/>
+        <Contacts/>
+      </>
+    }
     </div>
   );
 }
